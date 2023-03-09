@@ -31,6 +31,12 @@ class Artwork < ApplicationRecord
         through: :shared_artwork,
         source: :viewer
 
+    has_many :comments,
+        foreign_key: :artwork_id,
+        class_name: :Comment,
+        dependent: :destroy,
+        inverse_of: :artwork
+
    
 
 end
