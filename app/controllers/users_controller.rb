@@ -32,7 +32,7 @@ class UsersController < ApplicationController
             redirect_to user_url(input.id)
             # render json: params
         else
-            render json: params
+            render json: user.errors.full_messages, status: :unprocessable_entity
         end
 
     end
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.permit(:name, :email)
+        params.require(:user).permit(:name)
     end
 
 end
