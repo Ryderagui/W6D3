@@ -6,5 +6,10 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-User.create!(name: "Ryder", email: "Ryder@App.com")
-User.create!(name: "Josh", email: "Josh@App.com")
+Artwork.destroy_all
+User.destroy_all
+User.create!(name: "Ryder")
+User.create!(name: "Josh")
+Artwork.create!(title: "Starry Night", image_url: ";lad;lsd;f", artist_id: User.where("name = 'Josh'").pluck(:id).first)
+Artwork.create!(title: "A Big, Good, Art", image_url: "kla;jsdflasfj", artist_id: User.where("name = 'Ryder'").pluck(:id).first)
+ArtworkShare.create!(viewer_id: User.where("name = 'Ryder'").pluck(:id).first, artwork_id: Artwork.where("title = 'Starry Night'").pluck(:id).first)
