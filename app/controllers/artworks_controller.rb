@@ -3,7 +3,7 @@ class ArtworksController < ApplicationController
 
 
     def index
-        input = Artwork.all
+        input = Artwork.artworks_for_user_id(params[:user_id])
         render json: input
     end
 

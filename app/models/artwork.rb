@@ -13,6 +13,11 @@ class Artwork < ApplicationRecord
     validates :title, presence: true, uniqueness: { scope: :artist_id}
     validates :image_url, presence: true, uniqueness: true
 
+    def self.artworks_for_user_id(user_id)
+        Artwork.select(:id, :title, :image_url).left_joins(:shared_viewers).where("users.id = #{user_id} OR artist_id = #{user_id}")
+        # Artwork.select(:id, :title, :image_url).where("artist_id = user_id")
+    end
+
     belongs_to :artist,
         foreign_key: :artist_id,
         class_name: :User
@@ -25,4 +30,7 @@ class Artwork < ApplicationRecord
     has_many :shared_viewers,
         through: :shared_artwork,
         source: :viewer
+
+   
+
 end
