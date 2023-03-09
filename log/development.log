@@ -276,3 +276,161 @@ Completed 200 OK in 140ms (Views: 4.0ms | ActiveRecord: 44.0ms | Allocations: 44
   [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
   [1m[36mUser Load (27.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (id) LIMIT $1[0m  [["LIMIT", 1]]
   [1m[36mUser Load (4.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+Started GET "/users" for ::1 at 2023-03-09 09:17:32 -0800
+  [1m[36mActiveRecord::SchemaMigration Pluck (4.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as */*
+  [1m[36mUser Load (20.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+Completed 200 OK in 133ms (Views: 57.0ms | ActiveRecord: 58.8ms | Allocations: 6300)
+
+
+Started PATCH "/users/2/" for ::1 at 2023-03-09 09:20:14 -0800
+
+AbstractController::ActionNotFound - The action 'update' could not be found for UsersController:
+
+Started PATCH "/users/2/" for ::1 at 2023-03-09 09:21:21 -0800
+Processing by UsersController#update as */*
+  Parameters: {"email"=>"josh@josh.com", "id"=>"2"}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:30:in `update'
+Completed 400 Bad Request in 121ms (ActiveRecord: 24.9ms | Allocations: 7588)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:31:in `update'
+
+Started PATCH "/users/2/" for ::1 at 2023-03-09 09:22:26 -0800
+Processing by UsersController#update as */*
+  Parameters: {"email"=>"josh@josh.com", "id"=>"2"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:30:in `update'
+[31mUnpermitted parameter: :id. Context: { controller: UsersController, action: update, request: #<ActionDispatch::Request:0x000000010e9f48e0>, params: {"email"=>"josh@josh.com", "controller"=>"users", "action"=>"update", "id"=>"2"} }[0m
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:31:in `update'
+  [1m[36mUser Update (46.8ms)[0m  [1m[33mUPDATE "users" SET "email" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["email", "josh@josh.com"], ["updated_at", "2023-03-09 17:22:28.269651"], ["id", 2]]
+  ↳ app/controllers/users_controller.rb:31:in `update'
+  [1m[36mTRANSACTION (11.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:31:in `update'
+Completed 200 OK in 688ms (Views: 4.5ms | ActiveRecord: 97.6ms | Allocations: 8074)
+
+
+Started GET "/users" for ::1 at 2023-03-09 09:23:01 -0800
+Processing by UsersController#index as */*
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+Completed 200 OK in 8ms (Views: 6.7ms | ActiveRecord: 1.0ms | Allocations: 922)
+
+
+Started PATCH "/users/1/" for ::1 at 2023-03-09 09:23:49 -0800
+Processing by UsersController#update as */*
+  Parameters: {"email"=>"ryder@ryder.com", "name"=>"Aguilera", "id"=>"1"}
+  [1m[36mUser Load (3.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:30:in `update'
+[31mUnpermitted parameter: :id. Context: { controller: UsersController, action: update, request: #<ActionDispatch::Request:0x000000010e1ebf18>, params: {"email"=>"ryder@ryder.com", "name"=>"Aguilera", "controller"=>"users", "action"=>"update", "id"=>"1"} }[0m
+  [1m[36mTRANSACTION (6.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:31:in `update'
+  [1m[36mUser Update (26.5ms)[0m  [1m[33mUPDATE "users" SET "name" = $1, "email" = $2, "updated_at" = $3 WHERE "users"."id" = $4[0m  [["name", "Aguilera"], ["email", "ryder@ryder.com"], ["updated_at", "2023-03-09 17:23:49.297573"], ["id", 1]]
+  ↳ app/controllers/users_controller.rb:31:in `update'
+  [1m[36mTRANSACTION (7.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:31:in `update'
+Completed 200 OK in 74ms (Views: 0.2ms | ActiveRecord: 43.6ms | Allocations: 2531)
+
+
+Started GET "/users" for ::1 at 2023-03-09 09:23:55 -0800
+Processing by UsersController#index as */*
+  [1m[36mUser Load (10.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+Completed 200 OK in 20ms (Views: 9.9ms | ActiveRecord: 10.0ms | Allocations: 874)
+
+
+Started PATCH "/users/1/" for ::1 at 2023-03-09 09:26:27 -0800
+Processing by UsersController#update as */*
+  Parameters: {"email"=>"ryder@ryder.com", "name"=>"Aguilera", "id"=>"1"}
+  [1m[36mUser Load (4.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:30:in `update'
+[31mUnpermitted parameter: :id. Context: { controller: UsersController, action: update, request: #<ActionDispatch::Request:0x000000010e7f47e8>, params: {"email"=>"ryder@ryder.com", "name"=>"Aguilera", "controller"=>"users", "action"=>"update", "id"=>"1"} }[0m
+Completed 500 Internal Server Error in 232ms (ActiveRecord: 28.7ms | Allocations: 8090)
+
+
+
+NameError - undefined local variable or method `user' for #<UsersController:0x00000000007a80>
+            redirect_to user_url(user.id)
+                                 ^^^^
+Did you mean?  super:
+  app/controllers/users_controller.rb:32:in `update'
+
+Started PATCH "/users/1/" for ::1 at 2023-03-09 09:26:49 -0800
+Processing by UsersController#update as */*
+  Parameters: {"email"=>"ryder@ryder.com", "name"=>"Aguilera", "id"=>"1"}
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:30:in `update'
+[31mUnpermitted parameter: :id. Context: { controller: UsersController, action: update, request: #<ActionDispatch::Request:0x000000010eb4ebf0>, params: {"email"=>"ryder@ryder.com", "name"=>"Aguilera", "controller"=>"users", "action"=>"update", "id"=>"1"} }[0m
+Redirected to http://localhost:3000/users/1
+Completed 302 Found in 93ms (ActiveRecord: 24.0ms | Allocations: 4792)
+
+
+Started GET "/users/1" for ::1 at 2023-03-09 09:26:50 -0800
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:12:in `show'
+Completed 200 OK in 76ms (Views: 2.5ms | ActiveRecord: 15.1ms | Allocations: 4373)
+
+
+Started GET "/users" for ::1 at 2023-03-09 09:26:58 -0800
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+Completed 200 OK in 41ms (Views: 40.4ms | ActiveRecord: 0.6ms | Allocations: 906)
+
+
+Started DELETE "/users/1/" for ::1 at 2023-03-09 09:32:15 -0800
+Processing by UsersController#destroy as */*
+  Parameters: {"email"=>"ryder@ryder.com", "name"=>"Aguilera", "id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:41:in `destroy'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:42:in `destroy'
+  [1m[36mUser Destroy (11.8ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/users_controller.rb:42:in `destroy'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:42:in `destroy'
+Redirected to http://localhost:3000/users
+Completed 302 Found in 288ms (ActiveRecord: 73.1ms | Allocations: 5842)
+
+
+Started GET "/users" for ::1 at 2023-03-09 09:32:16 -0800
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+Completed 200 OK in 25ms (Views: 23.3ms | ActiveRecord: 0.8ms | Allocations: 929)
+
+
+Started POST "/users/1/" for ::1 at 2023-03-09 09:34:58 -0800
+  
+ActionController::RoutingError (No route matches [POST] "/users/1"):
+  
+Started POST "/user/1/" for ::1 at 2023-03-09 09:35:36 -0800
+  
+ActionController::RoutingError (No route matches [POST] "/user/1"):
+  
+Started POST "/users" for ::1 at 2023-03-09 09:36:19 -0800
+Processing by UsersController#create as */*
+  Parameters: {"email"=>"ryder@ryder.com", "name"=>"Aguilera"}
+  [1m[36mTRANSACTION (33.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[36mUser Create (45.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Aguilera"], ["email", "ryder@ryder.com"], ["created_at", "2023-03-09 17:36:19.613680"], ["updated_at", "2023-03-09 17:36:19.613680"]]
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:19:in `create'
+Completed 200 OK in 244ms (Views: 2.3ms | ActiveRecord: 150.4ms | Allocations: 4716)
+
+
+Started GET "/users" for ::1 at 2023-03-09 09:36:32 -0800
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:6:in `index'
+Completed 200 OK in 14ms (Views: 10.7ms | ActiveRecord: 0.5ms | Allocations: 1013)
+
+
