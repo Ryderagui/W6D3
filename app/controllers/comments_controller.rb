@@ -20,6 +20,7 @@ class CommentsController < ApplicationController
     def index
         author_input = comment_params[:author_id]
         artwork_input = comment_params[:artwork_id]
+        
 
         if author_input != nil
             comments = Comment.where("author_id = #{author_input}")

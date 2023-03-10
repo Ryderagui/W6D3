@@ -1,10 +1,24 @@
 class UsersController < ApplicationController
 
     def index
-        input = User.all
-        
-        render json: input
+        # Lets assume query is key: :value combos
+        # We want to know what the keys are
 
+        # /users?name=Josh
+        # /user?query='A generic string of stuff in here'
+        # /user?query=Josh 
+        # 
+      
+        if params.empty?
+            input = User.all
+        else 
+            # query_result = params[query]
+            # User.where(name LIKE query_result)
+            keys = params.keys
+            values = params.values
+            input = User.where("#{keys[0]} LIKE '#{values[0]}'") 
+        end
+        render json: input
 
     end
     
